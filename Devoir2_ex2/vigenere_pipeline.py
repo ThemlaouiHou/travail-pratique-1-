@@ -1,14 +1,3 @@
-#!/usr/bin/env python3
-"""
-vigenere_pipeline.py
-Pipeline complet pour casser un Vigenere (alphabet A-Z + espace, M=27).
-Usage:
-    python vigenere_pipeline.py vigenere.txt
-Sorties:
-    - vigenere_dechiffre_by_spaces.txt    (décryptage via méthode 'spaces' avec clé choisie)
-    - vigenere_dechiffre_by_chi2.txt      (décryptage via méthode chi2)
-    - vigenere_diagnostics.txt            (log détaillé)
-"""
 import sys
 from collections import Counter, defaultdict
 import math, re
@@ -157,7 +146,7 @@ def main(path):
         key_c = shifts_to_key(shifts_c)
         candidates.append((k, score_s, key_s, score_c, key_c))
         log.append(f"k={k:2d}  spaces_score={int(score_s):5d} key_spaces={key_s}   chi2_score={-score_c:.1f} key_chi2={key_c}")
-    # choisir k par meilleur spaces_score (ou par chi2 si tu préfères)
+    # choisir k par meilleur spaces_score
     best_by_spaces = max(candidates, key=lambda x: x[1])
     best_by_chi2   = max(candidates, key=lambda x: x[3])
     k_s, _, key_s, _, _ = best_by_spaces
